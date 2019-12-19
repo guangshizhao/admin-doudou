@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>This is an about page</h1>
-     <el-button @click="logOut" type="danger">注销账号</el-button>
+     <v-btn @click="logOut" type="danger">注销账号</v-btn>
   </div>
 </template>
 <script>

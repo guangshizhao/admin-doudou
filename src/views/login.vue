@@ -1,19 +1,48 @@
 <template>
 <div  id='login'>
-    <el-card class="box-card">
-        <div slot="header">
-            <strong>客官请进!!!</strong>
-        </div>
-        <el-form ref="form" :model="form" label-width="40px">
-            <el-form-item label="用户">
-                <el-input  v-model.trim="form.user" clearable></el-input>
-            </el-form-item>
-            <el-form-item label="密码">
-                <el-input v-model="form.passWord"  @keyup.enter.native="onSubmit" show-password></el-input>
-            </el-form-item>
-                <el-button type="primary" @click="onSubmit">立即进入</el-button>
-        </el-form>
-    </el-card>
+    <v-card
+        class="box-card"
+        max-width="400"
+    >
+    <v-card-title>
+         请进!!!
+    </v-card-title>
+    <v-card-text>
+    <v-form
+      ref="form"
+    >
+        <v-text-field
+            v-model="form.user"
+            :counter="10"
+             clearable
+            label="名字"
+        ></v-text-field>
+
+        <v-text-field
+            v-model="form.passWord"
+            :append-icon="form.show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="form.show1 ? 'text' : 'password'"
+            label="密码"
+            @click:append="form.show1 = !form.show1"
+        ></v-text-field>
+    </v-form>
+
+      <v-btn outlined   type="primary" @click="onSubmit">立即进入</v-btn>
+    </v-card-text>
+  </v-card>
+  <v-snackbar
+      v-model="snackbar"
+      :top=true
+      :timeout=2000
+    >
+      请随意输入用户名和密码
+      <v-btn
+        text
+        @click="snackbar = false"
+      >
+        关闭
+      </v-btn>
+   </v-snackbar>
 <bubbles></bubbles>
 </div>
 </template>
@@ -28,16 +57,23 @@ export default {
   data () {
     return {
       form: {
+        show1: false,
         user: '',
         passWord: ''
-      }
+      },
+      snackbar: false
     }
   },
   methods: {
     onSubmit () {
-      this.$store.commit('setState')
-      sessionStorage.setItem('user', this.$store.state.user.userState)
-      this.$router.push({ path: '/' })
+      if (this.form.user && this.form.passWord) {
+        console.log(111)
+        this.$store.commit('setState')
+        sessionStorage.setItem('user', this.$store.state.user.userState)
+        this.$router.push({ path: '/' })
+      } else {
+        this.snackbar = true
+      }
     }
   },
   mounted () {

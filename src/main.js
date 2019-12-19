@@ -3,9 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import LayHeader from '@/components/layout/LayHeader.vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-Vue.use(ElementUI)
+import Vuetify from 'vuetify'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'vuetify/dist/vuetify.min.css'
+import '@mdi/font/css/materialdesignicons.css'
+
+Vue.use(Vuetify)
 
 // 第三方UI引用
 /**
@@ -15,8 +18,8 @@ Vue.config.productionTip = false
 
 // 全剧组件
 Vue.component('LayHeader', LayHeader)
-
 new Vue({
+  vuetify: new Vuetify(),
   router,
   store,
   render: h => h(App)

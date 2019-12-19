@@ -22,4 +22,10 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script>
+    document.addEventListener("visibilitychange", function(){
+        document.title = document.hidden ? "你要走了吗" : "你回来啦";
+    });
+  </script>
+
 </html>
