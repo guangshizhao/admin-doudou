@@ -9,7 +9,7 @@ MongoClient.connect(uri, { useUnifiedTopology: true }, (_err, client) => {
   const collection = client.db('doudou').collection('test1')
   collection.find({}).toArray(function (_err, result) { // 返回集合中所有数据
     if (_err) throw _err
-    console.log('返回集合中国的数据', result)
+    console.log('返回集合中的数据', result)
     client.close()
   })
 })

@@ -4,9 +4,6 @@
         class="box-card"
         max-width="400"
     >
-    <v-card-title>
-         请进!!!
-    </v-card-title>
     <v-card-text>
     <v-form
       ref="form"
@@ -17,7 +14,6 @@
              clearable
             label="名字"
         ></v-text-field>
-
         <v-text-field
             v-model="form.passWord"
             :append-icon="form.show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -26,7 +22,6 @@
             @click:append="form.show1 = !form.show1"
         ></v-text-field>
     </v-form>
-
       <v-btn outlined   type="primary" @click="onSubmit">立即进入</v-btn>
     </v-card-text>
   </v-card>
@@ -38,6 +33,7 @@
       请随意输入用户名和密码
       <v-btn
         text
+        color="pink"
         @click="snackbar = false"
       >
         关闭
@@ -67,7 +63,6 @@ export default {
   methods: {
     onSubmit () {
       if (this.form.user && this.form.passWord) {
-        console.log(111)
         this.$store.commit('setState')
         sessionStorage.setItem('user', this.$store.state.user.userState)
         this.$router.push({ path: '/' })
@@ -85,7 +80,9 @@ export default {
 #login{
   height: 100%;
   background: url('~@/assets/login/loginBg.jpg') no-repeat;
-  background-size:100% 100%
+background-position: center 0;
+background-attachment:fixed;
+background-size: cover;
 }
 .box-card{
   position: absolute;
@@ -94,6 +91,5 @@ export default {
   transform: translate(-50%,-50%);
   z-index: 1;
   width: 400px;
-  height:300px;
 }
 </style>
