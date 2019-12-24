@@ -1,8 +1,8 @@
 <template>
-  <div >
+  <div class='app'>
     <!-- 头部 -->
     <v-app-bar app color="cyan" dark clipped-left>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>客官您来啦</v-toolbar-title>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" :class="[drawer? '':'tr90']" />
       <v-spacer></v-spacer>
       <v-menu left bottom>
@@ -61,7 +61,7 @@
     </v-navigation-drawer>
 
     <!-- 内容部分 -->
-    <v-content>
+    <v-content class="aaaaa">
       <v-container class="fill-height" fluid>
         <router-view></router-view>
       </v-container>
@@ -112,15 +112,17 @@ export default {
     }
   },
   created () {
-    console.log(this.routerList)
   }
 }
 </script>
 <style  scoped>
+.app{
+  width:100%
+}
 .tr90 {
   transform: rotate(90deg);
 }
 .aaaaa{
-  background: red
+    width: 100%;
 }
 </style>

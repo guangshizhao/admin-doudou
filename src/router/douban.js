@@ -23,7 +23,7 @@ export default [
       name: 'Top250',
       meta: {
         icon: 'widgets',
-        title: '豆瓣250'
+        title: '豆瓣TOP250'
       },
       component: () => import(/* webpackChunkName: "about" */ '../views/main/douban/top250.vue')
     }

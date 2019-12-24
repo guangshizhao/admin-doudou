@@ -1,0 +1,23 @@
+├── config  开发相关配置
+├── public  打包所需静态资源
+└── src
+    ├── api  AJAX请求
+    │    └──dbMovieServe.js  豆瓣电影api
+    └── assets  项目静态资源
+    │    └── login  login页 图片
+    ├── components  业务组件
+	│    └── layout  模块组件
+    ├── libs  封装工具函数
+    ├── router  路由配置
+    │    ├── douban.js  豆瓣模块路由文件
+    │    ├── routers.js 路由主文件
+    │    └── index.js  路由配置文件
+    ├── store  Vuex配置
+    ├── view  页面文件
+    │    ├── http  htpp报错跳转页面
+    │    ├── main 页面渲染主文件
+    │    │    └── douban 豆瓣相关页面
+    │    ├── Home 主页
+	│    ├── LayOut 主框架页面
+    │    └── Login  登录页面
+    └── tests  测试相关

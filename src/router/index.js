@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LayOut from '../views/LayOut.vue'
-import Login from '@/views/login.vue'
+import Login from '@/views/Login.vue'
 import routers from './routers'
 Vue.use(VueRouter)
 const routes = [
@@ -17,13 +17,13 @@ const routes = [
         icon: ' mdi-home',
         title: '主页'
       },
-      component: () => import(/* webpackChunkName: "about" */ '../views/home.vue')
+      component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
     }]
   },
   ...routers,
   {
     path: '/login',
-    name: 'login',
+    name: 'Login',
     component: Login
   },
   {
