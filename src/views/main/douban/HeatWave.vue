@@ -16,6 +16,7 @@
 import axios from 'axios'
 import DbMovie from '@/api/dbMovieServe.js'
 import { filterData } from '@/libs/utils.js'
+import qs from 'qs'
 export default {
   name: '',
   data () {
@@ -65,8 +66,8 @@ export default {
      *  @method upload
      */
     upload () {
-      axios.post('http://localhost:8888/show',
-        { name: '1' }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+      axios.get('http://localhost:8888/show',
+        { params: { a: 5 } })
         .then(res => {
           console.log(res)
         }).catch(err => {
