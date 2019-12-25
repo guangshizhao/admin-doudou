@@ -1,7 +1,9 @@
 /**
-     * @description 过滤表格数据   换行 和  数组中提取字符串
-     *  { arr } 是要过滤的数组
-     *  { br }  字符串是否加上换行符
+     *  过滤表格数据   换行 和  数组中提取字符串
+     * @method filterData
+     * @param { arr} arr 是要过滤的数组
+     * @param { string } br 字符串是否加上换行符
+     * @return { string }  返回过滤后的数据
      */
 export const filterData = (arr, br) => {
   if (br) {

@@ -1,6 +1,6 @@
 <template>
 <div class='box'>
-  <p>{{title}}</p>
+  <p>{{title}} <v-btn  class='float-right' @click='upload'>上传信息</v-btn></p>
    <vxe-grid
       border
       :height="tableHeight"
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import DbMovie from '@/api/dbMovieServe.js'
 import { filterData } from '@/libs/utils.js'
 export default {
@@ -23,14 +24,15 @@ export default {
       tableHeight: 300,
       tableColumn: [
         { type: 'seq', width: 50 },
-        { field: 'title', title: '名字' },
-        { field: 'castsMap', title: '主演' },
-        { field: 'directorsMap', title: '导演' },
-        { field: 'year', title: '年份', showHeaderOverflow: true },
-        { field: 'genresMap', title: '类型', showHeaderOverflow: true },
-        { field: 'durationsMap', title: '片长', showHeaderOverflow: true },
+        { field: 'title', title: '名字', showOverflow: true, showHeaderOverflow: true },
+        { field: 'castsMap', title: '主演', showOverflow: true, showHeaderOverflow: true },
+        { field: 'directorsMap', title: '导演', showOverflow: true, showHeaderOverflow: true },
+        { field: 'year', title: '年份', showOverflow: true, showHeaderOverflow: true },
+        { field: 'genresMap', title: '类型', showOverflow: true, showHeaderOverflow: true },
+        { field: 'durationsMap', title: '片长', showOverflow: true, showHeaderOverflow: true },
         { field: 'pubdatesMap',
           title: '上映时间',
+          showOverflow: true,
           showHeaderOverflow: true,
           slots: {
             default: ({ row }, h) => {
@@ -40,9 +42,10 @@ export default {
             }
           }
         },
-        { field: 'mainland_pubdate', title: '大陆上映时间', showHeaderOverflow: true },
+        { field: 'mainland_pubdate', title: '大陆上映时间', showOverflow: true, showHeaderOverflow: true },
         { field: 'imagesMap',
           title: '剧照',
+          showOverflow: true,
           showHeaderOverflow: true,
           slots: {
             default: ({ row }, h) => {
@@ -57,20 +60,23 @@ export default {
     }
   },
   methods: {
-
     /**
-     * @description 计算表格高度
+     * 上传到数据库
+     *  @method upload
      */
-    handleSize () {
-      this.tableHeight = window.innerHeight - 180
-    },
-    onResize () {
-      window.onresize = () => {
-        this.handleSize()
-      }
+    upload () {
+      axios.post('http://localhost:8888/show',
+        { name: '1' }, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+        .then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
     },
     /**
-     * @description 首次进入页面获取表格数据
+     *  首次进入页面获取热映数据50条
+     * @method getHit
+     * @return { array }
      */
     async getHit () {
       let data = await new DbMovie().getIsHit('in_theaters')
@@ -90,6 +96,23 @@ export default {
         this.loading = false
       } catch (err) {
         console.log('失败', err)
+      }
+    },
+
+    /**
+     *  计算表格高度
+     * @method handleSize
+     */
+    handleSize () {
+      this.tableHeight = document.body.clientHeight - 180
+    },
+    /**
+     *  当浏览器被重置大小时执行
+     * @method onResize
+     */
+    onResize () {
+      window.onresize = () => {
+        this.handleSize()
       }
     }
   },

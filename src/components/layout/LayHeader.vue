@@ -1,5 +1,6 @@
 <template>
 <div>
+  头部
   <slot></slot>
 </div>
 </template>

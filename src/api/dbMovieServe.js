@@ -6,8 +6,11 @@ export default class DbMovie {
     this.apiUrl = ip
   }
   /**
-   * @description 获取正在热映的电影
-   */
+     *  get请求 获取正在热映的20条电影数据
+     * @method getIsHit
+     * @param { string } url 请求路径
+     * @return { promise }
+     */
   getIsHit (url) {
     return new Promise((resolve, reject) => {
       axios.get(this.apiUrl + url)
@@ -16,6 +19,18 @@ export default class DbMovie {
         }).catch((err) => {
           reject(err)
         })
+    })
+  }
+  /**
+     *  get请求 获取正在top20的电影
+     * @method getTop
+     * @param { api } api 请求路径
+     * @return { promise }
+     */
+  getTop (api) {
+    return axios.request({
+      url: this.apiUrl + api,
+      method: 'get'
     })
   }
 }
