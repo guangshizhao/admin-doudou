@@ -1,26 +1,37 @@
 const express = require('express')
 const http = express()
-let bodyParser = require('body-parser')// 当客户端的请求为post请求时需要通过它去解析客户端传过来的数据
-// var MongoClient = require('mongodb').MongoClient
-// var uri = 'mongodb://zhaoshiguang:doudoubujieba@cluster0-shard-00-00-gakow.mongodb.net:27017,cluster0-shard-00-01-gakow.mongodb.net:27017,cluster0-shard-00-02-gakow.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority'
+var MongoClient = require('mongodb').MongoClient
+var uri = 'mongodb://zhaoshiguang:doudoubujieba@cluster0-shard-00-00-gakow.mongodb.net:27017,cluster0-shard-00-01-gakow.mongodb.net:27017,cluster0-shard-00-02-gakow.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority'
 
-// parse application/x-www-form-urlencoded
-// parse application/json
+// http.use(express.urlencoded({ extended: false }))// 解析post发送的数据
+// http.use(express.json())// 解析post发送的数据
+
 http.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Credentials', true)
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With')
-  res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
-  res.header('Content-Type', 'application/json;charset=utf-8')
+  // res.header('Access-Control-Allow-Headers', 'Content-Type')
   next()
 })
 
+/*
+    如果后台需要请求Content-Type application/json;charset=utf-8  格式 axios正常传 后端加上这个 res.header('Access-Control-Allow-Headers', 'Content-Type')
+    如果是 application/x-www-form-urlencoded   格式  前端 用 qs序列化 一下
+
+    一. post header如果是 Content-Type application/json;charset=utf-8 格式的  前端 axios 正常穿对象就行 后端需要加上
+       1.http.use(express.json())// 解析post发送的数据 这样 req.body 就可以拿到
+       2 res.header('Access-Control-Allow-Headers', 'Content-Type')
+
+    二. post header  是 application/x-www-form-urlencoded
+      1前端就需要qs.stringify 序列化对象一下
+      2. res.header('Access-Control-Allow-Headers', 'Content-Type')不用加
+      3.http.use(express.urlencoded({ extended: false }))  需要加上他
+    三.get 的话 后端不需要加 header use
+        只需要把 发送给后台的数据 用params包起来{params:{11:11}}
+       */
 /**
- * @method get 请求
+ * @method get
  */
-http.post('/show', (req, res) => {
-  let obj = req.body
-  console.log('......', obj)
+http.get('/show', (req, res) => {
+  console.log(req.query)
 /*   MongoClient.connect(uri, {
     useUnifiedTopology: true
   }, (_err, client) => {
