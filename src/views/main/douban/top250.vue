@@ -1,6 +1,12 @@
 <template>
 <div class='box'>
-  <p>{{title}}</p>
+  <p>{{title}} <v-btn
+                class='float-right'
+                :loading="uploading"
+                :disabled="uploading"
+                @click='upload'>
+                上传信息</v-btn>
+  </p>
    <vxe-grid
       border
       :height="tableHeight"
@@ -9,18 +15,32 @@
       :columns="tableColumn"
       :data="tableData">
   </vxe-grid>
+
+   <v-snackbar
+      top
+      v-model="snackbar"
+      :timeout='2000'
+      class="text-center"
+    >
+    {{insertedCount}}
+    </v-snackbar>
 </div>
 </template>
 
 <script>
 import DbMovie from '@/api/dbMovieServe.js'
 import { filterData } from '@/libs/utils.js'
+import axios from 'axios'
 export default {
   name: '',
   data () {
     return {
       loading: true,
+      uploading: false,
+      tableLoading: true,
+      snackbar: false,
       tableHeight: 300,
+      insertedCount: '',
       tableColumn: [
         { type: 'seq', width: 50 },
         { field: 'title', title: '名字', showOverflow: true, showHeaderOverflow: true },
@@ -59,7 +79,22 @@ export default {
     }
   },
   methods: {
-
+    /**
+     * 上传到数据库
+     *  @method upload
+     */
+    upload () {
+      this.uploading = true
+      axios.post('http://localhost:8888/show', { jihe: 'doubanTop', data: this.tableData })
+        .then(res => {
+          this.uploading = false
+          this.insertedCount = `你成功添加了${res.data.insertedCount}条数据`
+          this.snackbar = true
+        }).catch(() => {
+          this.uploading = true
+          this.insertedCount = `添加失败请重试`
+        })
+    },
     /**
      *  计算表格高度
      * @method handleSize

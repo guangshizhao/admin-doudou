@@ -1,14 +1,28 @@
 <template>
 <div class='box'>
-  <p>{{title}} <v-btn  class='float-right' @click='upload'>上传信息</v-btn></p>
+  <p>{{title}} <v-btn
+                class='float-right'
+                :loading="uploading"
+                :disabled="uploading"
+                @click='upload'>
+                上传信息</v-btn></p>
    <vxe-grid
       border
       :height="tableHeight"
       align="center"
-      :loading="loading"
+      :loading="tableLoading"
       :columns="tableColumn"
       :data="tableData">
   </vxe-grid>
+
+   <v-snackbar
+      top
+      v-model="snackbar"
+      :timeout='2000'
+      class="text-center"
+    >
+    {{insertedCount}}
+    </v-snackbar>
 </div>
 </template>
 
@@ -16,13 +30,15 @@
 import axios from 'axios'
 import DbMovie from '@/api/dbMovieServe.js'
 import { filterData } from '@/libs/utils.js'
-import qs from 'qs'
 export default {
   name: '',
   data () {
     return {
-      loading: true,
+      uploading: false,
+      tableLoading: true,
+      snackbar: false,
       tableHeight: 300,
+      insertedCount: '',
       tableColumn: [
         { type: 'seq', width: 50 },
         { field: 'title', title: '名字', showOverflow: true, showHeaderOverflow: true },
@@ -66,12 +82,15 @@ export default {
      *  @method upload
      */
     upload () {
-      axios.get('http://localhost:8888/show',
-        { params: { a: 5 } })
+      this.uploading = true
+      axios.post('http://localhost:8888/show', { jihe: 'doubanHit', data: this.tableData })
         .then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
+          this.uploading = false
+          this.insertedCount = `你成功添加了${res.data.insertedCount}条数据`
+          this.snackbar = true
+        }).catch(() => {
+          this.uploading = true
+          this.insertedCount = `添加失败请重试`
         })
     },
     /**
@@ -93,8 +112,7 @@ export default {
           return item
         })
         this.title = data.data.title
-        console.log(222, this.tableData)
-        this.loading = false
+        this.tableLoading = false
       } catch (err) {
         console.log('失败', err)
       }
