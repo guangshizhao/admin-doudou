@@ -1,13 +1,18 @@
 <template>
   <div class="about">
-    <h1>This is an home page</h1>
+    <h1>This is an home page123456</h1>
   </div>
 </template>
 <script>
 export default {
-  methods: {
-    logOut () {
+  components: {
+  },
+  data () {
+    return {
     }
+  },
+  methods: {
+    logOut () {}
   }
 }
 </script>
