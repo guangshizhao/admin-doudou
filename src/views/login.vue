@@ -9,17 +9,19 @@
       ref="form"
     >
         <v-text-field
-            v-model="form.user"
+            clearable
             :counter="10"
-             clearable
+            v-model="form.user"
+            @keyup.enter="onSubmit"
             label="名字"
         ></v-text-field>
         <v-text-field
             v-model="form.passWord"
+            label="密码"
             :append-icon="form.show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :type="form.show1 ? 'text' : 'password'"
-            label="密码"
             @click:append="form.show1 = !form.show1"
+            @keyup.enter="onSubmit"
         ></v-text-field>
     </v-form>
       <v-btn outlined   type="primary" @click="onSubmit">立即进入</v-btn>
@@ -54,8 +56,8 @@ export default {
     return {
       form: {
         show1: false,
-        user: '',
-        passWord: ''
+        user: 'li',
+        passWord: '23'
       },
       snackbar: false
     }
