@@ -19,5 +19,5 @@
     │    │    └── douban 豆瓣相关页面
     │    ├── Home 主页
 	│    ├── LayOut 主框架页面
-    │    └── Login  登录页面
+    │    └── login  登录页面
     └── tests  测试相关

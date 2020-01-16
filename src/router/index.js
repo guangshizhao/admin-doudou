@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LayOut from '../views/LayOut.vue'
-import Login from '@/views/Login.vue'
+import login from '@/views/login.vue'
 import routers from './routers'
 Vue.use(VueRouter)
 const routes = [
@@ -23,8 +23,8 @@ const routes = [
   ...routers,
   {
     path: '/login',
-    name: 'Login',
-    component: Login
+    name: 'login',
+    component: login
   },
   {
     path: '*',
