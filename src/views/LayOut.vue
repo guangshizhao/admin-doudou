@@ -21,6 +21,8 @@
           </v-list-item>
         </v-list>
       </v-menu>
+      <v-btn @click="$router.push({name:'Top250'})">1</v-btn>
+      <v-btn @click="$router.push({name:'HeatWave1'})">2</v-btn>
     </v-app-bar>
 
     <!-- 左边侧边栏 -->

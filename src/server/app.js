@@ -42,6 +42,19 @@ http.post('/show', (req, res) => {
     })
   })
 })
+/**
+ * @method post
+ */
+http.post('/login',(req, res) => {
+  res.send()
+})
+http.get('/sss/zsg', (req, res) => {
+  res.send('/api/的测试数据哈哈')
+})
+
+http.get('/test1', (req, res) => {
+  res.send('/test/的测试数据哈哈111')
+})
 
 /*   collection.find({}).toArray(function (_err, result) { // 返回集合中所有数据
           else {
@@ -70,6 +83,6 @@ http.post('/show', (req, res) => {
 //         db.close();
 //     });
 //   });
-http.listen(8888, () => {
-  console.log('8888 端口启动成功12')
+http.listen(3000, () => {
+  console.log('3000 端口启动成功12')
 })

@@ -101,6 +101,7 @@ export default {
     async getHit () {
       let data = await new DbMovie().getIsHit('in_theaters')
       try {
+        console.log('+++', data)
         this.tableData = data.data.subjects
         this.tableData.map(item => {
           item.castsMap = filterData(item.casts)

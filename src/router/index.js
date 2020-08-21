@@ -34,6 +34,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  // mode: 'history',
   routes
 })
 /* 1.模拟登录状态   true 代表已经登录 false 代表未登录 */

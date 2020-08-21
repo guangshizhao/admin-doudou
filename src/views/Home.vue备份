@@ -1,0 +1,54 @@
+<template>
+  <div class="about">
+    <h1>This is an home page123456</h1>
+    <v-btn @click="handle_click">+++</v-btn>
+    <v-btn @click.once="sub_click">console.log()</v-btn>
+    <v-btn @click="devClick">反向代理测试</v-btn>
+    <v-btn @click="devClick1">反向代理测试1</v-btn>
+    <v-btn @click="devClick2">网上快递接口</v-btn>
+    <div v-for="(item,index) in list" :key="`${index}_i`">
+      name:
+      <input type="text" v-model="item.user" />
+      pass:
+      <input type="text" v-model="item.password" />
+    </div>
+  </div>
+</template>
+<script>
+import axios from 'axios'
+export default {
+  components: {},
+  data () {
+    return {
+      list: [],
+      tableData: []
+    }
+  },
+  methods: {
+    logOut () {},
+    handle_click () {
+      this.list.push({ user: '', password: '' })
+    },
+    sub_click () {
+      console.log(this.list)
+    },
+    devClick () {
+      axios.get('/api/zsg').then(res => {
+        console.log(res)
+      })
+    },
+    devClick1 () {
+      axios.get('/test/test1').then(res => {
+        console.log(res)
+      })
+    },
+    devClick2 () {
+      axios.get('/kuaidi/query?type=shentong&postid=11111').then(
+        res => {
+          console.log(res.data)
+        }
+      )
+    }
+  }
+}
+</script>

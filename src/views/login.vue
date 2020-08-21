@@ -80,8 +80,8 @@ export default {
 
 <style scoped>
 #login{
-  height: 100%;
-  background: url('~@/assets/login/loginBg.jpg') no-repeat;
+height: 100%;
+background: url('~@/assets/login/loginBg.jpg') no-repeat;
 background-position: center 0;
 background-attachment:fixed;
 background-size: cover;
